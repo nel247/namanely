@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Notifikasi</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #ffe4e1;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin: 100px auto;
+      background-color: white;
+      padding: 20px;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+      color: #333;
+    }
+    .notification {
+      background-color: #ffeb3b;
+      color: #333;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Selamat Datang di Kalkulator</h1>
+    <!-- Notifikasi -->
+    <div id="notification" class="notification">
+      Halo, pengguna! Selamat menggunakan kalkulator.
+    </div>
+
+    <!-- Tombol Menuju Kalkulator -->
+    <a id="link-to-calculator" href="#" class="button">Pergi ke Kalkulator</a>
+  </div>
+
+  <script>
+    // Ambil parameter "nama" dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get('nama');
+
+    // Personalize notifikasi jika nama ada
+    if (nama) {
+      document.getElementById('notification').innerText = `Halo, ${nama}! Selamat menggunakan kalkulator.`;
+    }
+
+    // Set URL tujuan kalkulator
+    const linkToCalculator = document.getElementById('link-to-calculator');
+    const kalkulatorUrl = "kalkulator1.html";
+    
+    // Tambahkan nama ke URL kalkulator jika ada
+    if (nama) {
+      linkToCalculator.href = `${kalkulatorUrl}?nama=${encodeURIComponent(nama)}`;
+    } else {
+      linkToCalculator.href = kalkulatorUrl;
+    }
+  </script>
+</body>
+</html>
