@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APLIKASI KALKULATOR</title>
+    <style type="text/css">
+     
+      body {
+        background-color: #ffe4e1;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .kotak {
+        width: 320px;
+        margin: 100px auto;
+        padding: 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      td {
+        width: 25%;
+        padding: 5px;
+      }
+
+      #inputan {
+        height: 80px;
+        font-size: 50px;
+        text-align: right;
+        vertical-align: bottom;
+      }
+
+      button {
+        height: 50px;
+        width: 100%;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+   
+
+    <div class="kotak">
+      <table border="1">
+        <tr>
+          <td colspan="4" id="inputan">0</td>
+        </tr>
+        <tr>
+          <td colspan="2"><button onclick="tombol(this)">AC</button></td>
+          <td><button onclick="tombol(this)">Del</button></td>
+          <td><button onclick="tombol(this)">/</button></td>
+        </tr>
+        <tr>
+          <td><button onclick="tombol(this)">7</button></td>
+          <td><button onclick="tombol(this)">8</button></td>
+          <td><button onclick="tombol(this)">9</button></td>
+          <td><button onclick="tombol(this)">*</button></td>
+        </tr>
+        <tr>
+          <td><button onclick="tombol(this)">4</button></td>
+          <td><button onclick="tombol(this)">5</button></td>
+          <td><button onclick="tombol(this)">6</button></td>
+          <td><button onclick="tombol(this)">+</button></td>
+        </tr>
+        <tr>
+          <td><button onclick="tombol(this)">1</button></td>
+          <td><button onclick="tombol(this)">2</button></td>
+          <td><button onclick="tombol(this)">3</button></td>
+          <td><button onclick="tombol(this)">-</button></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button onclick="tombol(this)">0</button></td>
+          <td><button onclick="tombol(this)">.</button></td>
+          <td><button onclick="tombol(this)">=</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <script type="text/javascript">
+      // Ambil elemen input untuk menampilkan angka/operator
+      var inputan = document.getElementById('inputan');
+
+      // Fungsi untuk menangani tombol yang ditekan
+      function tombol(obj) {
+        var kondisi = obj.innerHTML; // Nilai tombol yang ditekan
+        var currentInput = inputan.innerHTML; // Nilai input saat ini
+
+        if (kondisi === '=') {
+          // Jika tombol "=" ditekan, evaluasi ekspresi matematika
+          try {
+            inputan.innerHTML = eval(currentInput); // Evaluasi ekspresi
+          } catch (e) {
+            inputan.innerHTML = 'Error'; // Tampilkan error jika gagal
+          }
+        } else if (kondisi === 'Del') {
+          // Jika tombol "Del" ditekan, hapus karakter terakhir
+          inputan.innerHTML = currentInput.slice(0, -1) || '0';
+        } else if (kondisi === 'AC') {
+          // Jika tombol "AC" ditekan, reset input ke "0"
+          inputan.innerHTML = '0';
+        } else {
+          // Jika tombol angka atau operator ditekan
+          const operators = ['*', '+', '-', '/']; // Operator valid
+          const lastChar = currentInput[currentInput.length - 1]; // Karakter terakhir input
+
+          // Jika tombol adalah operator
+          if (operators.includes(kondisi)) {
+            // Jika karakter terakhir juga operator, ganti dengan yang baru
+            if (operators.includes(lastChar)) {
+              inputan.innerHTML = currentInput.slice(0, -1) + kondisi;
+              console.log(kondisi);
+              return;
+            }
+          }
+
+          // kalau inputan nya 0, maka ganti dengan angka sekarang
+          if (currentInput === '0') {
+            // Ganti "0" dengan angka/operator yang ditekan
+            inputan.innerHTML = kondisi;
+          } else {
+            // Tambahkan angka/operator ke input
+            inputan.innerHTML += kondisi;
+          }
+        }
+      }
+    </script>
+
+    <hr />
+    <footer style="text-align: center">
+      <p>Copyright &copy; 2024 PPLG TEAM</p>
+    </footer>
+  </body>
+</html>
